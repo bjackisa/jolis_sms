@@ -21,6 +21,20 @@ use App\Models\UserSecurity;
 
 class ProfileController extends Controller
 {
+    private function securityQuestions(): array
+    {
+        return [
+            'What is the name of your first school?',
+            'What is your mother\'s maiden name?',
+            'What is the name of your first pet?',
+            'In what city were you born?',
+            'What is your favorite food?',
+            'What is your favorite color?',
+            'What was the name of your best friend in childhood?',
+            'What is the name of the street you grew up on?'
+        ];
+    }
+
     public function index(Request $request): void
     {
         $user = Auth::user();
@@ -33,7 +47,8 @@ class ProfileController extends Controller
             'user' => $user,
             'student' => $student,
             'enrollment' => $enrollment,
-            'security' => $security
+            'security' => $security,
+            'securityQuestions' => $this->securityQuestions()
         ]);
     }
 
@@ -133,7 +148,7 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $errors = $this->validate($request->body(), [
-            'secret_question' => 'required|min:5',
+            'secret_question' => 'required',
             'secret_answer' => 'required|min:2'
         ]);
 
@@ -144,6 +159,13 @@ class ProfileController extends Controller
         }
 
         $question = trim((string)$request->input('secret_question'));
+
+        if (!in_array($question, $this->securityQuestions(), true)) {
+            $_SESSION['_errors'] = ['secret_question' => ['Please select a valid secret question.']];
+            $this->back();
+            return;
+        }
+
         $answer = strtolower(trim((string)$request->input('secret_answer')));
         $answerHash = password_hash($answer, PASSWORD_BCRYPT, ['cost' => PASSWORD_COST]);
 

@@ -144,7 +144,14 @@ View::extend('layouts.dashboard');
                     <div class="row g-3">
                         <div class="col-12">
                             <label class="form-label">Secret Question</label>
-                            <input type="text" name="secret_question" class="form-control <?= View::hasError('secret_question') ? 'is-invalid' : '' ?>" value="<?= htmlspecialchars($security['secret_question'] ?? '') ?>" placeholder="e.g. What is the name of your first school?" required>
+                            <select name="secret_question" class="form-select <?= View::hasError('secret_question') ? 'is-invalid' : '' ?>" required>
+                                <option value="" disabled <?= empty($security['secret_question'] ?? '') ? 'selected' : '' ?>>Select a question</option>
+                                <?php foreach (($securityQuestions ?? []) as $q): ?>
+                                <option value="<?= htmlspecialchars($q) ?>" <?= (($security['secret_question'] ?? '') === $q) ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($q) ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
                             <?php if ($error = View::error('secret_question')): ?>
                             <div class="invalid-feedback d-block"><?= $error ?></div>
                             <?php endif; ?>
