@@ -27,7 +27,7 @@ class Setting extends Model
             return self::$cache[$key];
         }
 
-        $setting = self::findBy('key', $key);
+        $setting = self::rawOne('SELECT * FROM settings WHERE `key` = ? LIMIT 1', [$key]);
         
         if (!$setting) {
             return $default;
@@ -41,7 +41,7 @@ class Setting extends Model
 
     public static function set(string $key, $value, string $type = 'string'): void
     {
-        $existing = self::findBy('key', $key);
+        $existing = self::rawOne('SELECT * FROM settings WHERE `key` = ? LIMIT 1', [$key]);
         
         if ($existing) {
             self::update($existing['id'], ['value' => (string)$value, 'type' => $type]);
