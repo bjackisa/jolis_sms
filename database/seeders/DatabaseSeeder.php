@@ -1,6 +1,19 @@
 <?php
-require_once dirname(__DIR__, 2) . '/config/autoload.php';
-require_once dirname(__DIR__, 2) . '/config/config.php';
+/**
+ * Database Seeder
+ * 
+ * @developer   Jackisa Daniel Barack
+ * @email       barackdanieljackisa@gmail.com
+ * @website     jackisa.com
+ * @quote       "One man and God are Majority"
+ * @rights      All rights reserved
+ */
+
+// Define BASE_PATH for standalone execution
+define('BASE_PATH', dirname(__DIR__, 2));
+
+require_once BASE_PATH . '/config/autoload.php';
+require_once BASE_PATH . '/config/config.php';
 
 use App\Core\Database;
 use App\Core\Auth;
@@ -11,7 +24,11 @@ class DatabaseSeeder
 
     public function __construct()
     {
-        $this->db = Database::getInstance();
+        try {
+            $this->db = Database::getInstance();
+        } catch (\Exception $e) {
+            die("Database connection failed: " . $e->getMessage() . "\n");
+        }
     }
 
     public function run(): void

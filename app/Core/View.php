@@ -76,7 +76,7 @@ class View
 
     public static function asset(string $path): string
     {
-        return APP_URL . '/public/' . ltrim($path, '/');
+        return APP_URL . '/assets/' . ltrim($path, '/');
     }
 
     public static function url(string $path = ''): string

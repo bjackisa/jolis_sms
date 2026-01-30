@@ -1,19 +1,21 @@
 <?php
+/**
+ * Base Controller
+ * 
+ * @developer   Jackisa Daniel Barack
+ * @email       barackdanieljackisa@gmail.com
+ * @website     jackisa.com
+ * @quote       "One man and God are Majority"
+ * @rights      All rights reserved
+ */
+
 namespace App\Core;
 
 class Controller
 {
     protected function view(string $view, array $data = []): void
     {
-        extract($data);
-        
-        $viewPath = BASE_PATH . '/app/Views/' . str_replace('.', '/', $view) . '.php';
-        
-        if (file_exists($viewPath)) {
-            require $viewPath;
-        } else {
-            throw new \Exception("View not found: {$view}");
-        }
+        echo View::render($view, $data);
     }
 
     protected function json(array $data, int $status = 200): void

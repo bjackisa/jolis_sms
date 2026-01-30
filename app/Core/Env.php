@@ -1,14 +1,29 @@
 <?php
+/**
+ * Environment Configuration Loader
+ * 
+ * @developer   Jackisa Daniel Barack
+ * @email       barackdanieljackisa@gmail.com
+ * @website     jackisa.com
+ * @quote       "One man and God are Majority"
+ * @rights      All rights reserved
+ */
+
 namespace App\Core;
 
 class Env
 {
     protected static array $variables = [];
+    protected static bool $loaded = false;
 
     public static function load(string $path): void
     {
-        if (!file_exists($path)) {
+        if (self::$loaded) {
             return;
+        }
+        
+        if (!file_exists($path)) {
+            throw new \RuntimeException("Environment file not found: {$path}");
         }
 
         $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -32,6 +47,8 @@ class Env
             putenv("$name=$value");
             $_ENV[$name] = $value;
         }
+        
+        self::$loaded = true;
     }
 
     public static function get(string $key, $default = null)

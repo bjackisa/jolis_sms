@@ -38,7 +38,7 @@ $dashboardPrefix = $isInstructor ? '/instructor' : '/student';
     <!-- Toastr -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <!-- Custom Dashboard CSS -->
-    <link href="/public/assets/css/dashboard.css" rel="stylesheet">
+    <link href="/assets/css/dashboard.css" rel="stylesheet">
     
     <?= View::yield('styles') ?>
 </head>
