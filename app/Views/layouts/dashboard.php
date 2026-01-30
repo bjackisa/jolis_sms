@@ -141,6 +141,15 @@ $dashboardPrefix = $isInstructor ? '/instructor' : '/student';
                     </a>
                 </li>
                 
+                <?php if ($isInstructor): ?>
+                <li class="nav-item">
+                    <a class="nav-link <?= strpos($_SERVER['REQUEST_URI'], '/contact-messages') !== false ? 'active' : '' ?>" href="<?= $dashboardPrefix ?>/contact-messages">
+                        <i class="bi bi-envelope"></i>
+                        <span>Contact Messages</span>
+                    </a>
+                </li>
+                <?php endif; ?>
+                
                 <li class="nav-divider"></li>
                 
                 <li class="nav-item">

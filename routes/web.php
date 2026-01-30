@@ -40,6 +40,13 @@ $router->group(['prefix' => 'instructor', 'middleware' => ['InstructorMiddleware
     $router->get('/subjects', 'Instructor\SubjectController@index');
     $router->post('/subjects/assign', 'Instructor\SubjectController@assign');
     
+    // Contact Messages
+    $router->get('/contact-messages', 'Instructor\ContactMessageController@index');
+    $router->get('/contact-messages/{id}', 'Instructor\ContactMessageController@show');
+    $router->post('/contact-messages/{id}/mark-read', 'Instructor\ContactMessageController@markAsRead');
+    $router->post('/contact-messages/{id}/delete', 'Instructor\ContactMessageController@delete');
+    $router->post('/contact-messages/{id}/reply', 'Instructor\ContactMessageController@reply');
+    
     // Exams
     $router->get('/exams', 'Instructor\ExamController@index');
     $router->get('/exams/create', 'Instructor\ExamController@create');

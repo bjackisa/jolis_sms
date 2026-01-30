@@ -125,6 +125,25 @@ View::extend('layouts.dashboard');
             </a>
         </div>
     </div>
+    <div class="col-lg col-md-6 col-6">
+        <div class="card border-0 shadow-sm bg-danger text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="fw-bold mb-0"><?= $stats['contact_messages'] ?? 0 ?></h3>
+                        <p class="mb-0 opacity-75">Messages</p>
+                    </div>
+                    <div class="opacity-50">
+                        <i class="bi bi-envelope fs-1"></i>
+                    </div>
+                </div>
+            </div>
+            <a href="/instructor/contact-messages" class="card-footer bg-transparent border-0 text-white text-decoration-none d-flex justify-content-between align-items-center">
+                <span>View</span>
+                <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    </div>
 </div>
 
 <div class="row g-4">
@@ -249,6 +268,44 @@ View::extend('layouts.dashboard');
                             <?php endif; ?>
                         </div>
                     </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <!-- Contact Messages -->
+        <div class="card border-0 shadow-sm mt-4">
+            <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold mb-0"><i class="bi bi-envelope me-2"></i>Contact Messages
+                    <?php if (!empty($contactMessages)): ?>
+                    <span class="badge bg-danger ms-2"><?= count($contactMessages) ?> New</span>
+                    <?php endif; ?>
+                </h5>
+                <a href="/instructor/contact-messages" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="card-body">
+                <?php if (empty($contactMessages)): ?>
+                <p class="text-muted text-center py-4 mb-0">No new contact messages.</p>
+                <?php else: ?>
+                <div class="list-group list-group-flush">
+                    <?php foreach (array_slice($contactMessages, 0, 5) as $message): ?>
+                    <a href="/instructor/contact-messages/<?= $message['id'] ?>" class="list-group-item list-group-item-action px-0 border-0">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center mb-1">
+                                    <h6 class="mb-0 fw-semibold me-2"><?= htmlspecialchars($message['name']) ?></h6>
+                                    <span class="badge bg-danger">New</span>
+                                </div>
+                                <p class="text-muted small mb-1"><strong>Subject:</strong> <?= htmlspecialchars($message['subject']) ?></p>
+                                <p class="text-muted small mb-1"><?= substr(htmlspecialchars($message['message']), 0, 80) ?>...</p>
+                                <small class="text-muted">
+                                    <i class="bi bi-clock me-1"></i>
+                                    <?= date('M d, Y H:i', strtotime($message['created_at'])) ?>
+                                </small>
+                            </div>
+                        </div>
+                    </a>
                     <?php endforeach; ?>
                 </div>
                 <?php endif; ?>

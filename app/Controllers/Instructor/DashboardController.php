@@ -21,6 +21,7 @@ use App\Models\Homework;
 use App\Models\Notice;
 use App\Models\AcademicYear;
 use App\Models\Term;
+use App\Models\ContactMessage;
 
 class DashboardController extends Controller
 {
@@ -64,6 +65,9 @@ class DashboardController extends Controller
 
         $notices = Notice::forRole('instructor');
         $recentNotices = array_slice($notices, 0, 5);
+        
+        $contactMessages = ContactMessage::getNew();
+        $stats['contact_messages'] = ContactMessage::countNew();
 
         $this->view('instructor.dashboard', [
             'title' => 'Dashboard - Instructor',
@@ -74,7 +78,8 @@ class DashboardController extends Controller
             'classes' => $classes,
             'subjects' => $subjects,
             'stats' => $stats,
-            'notices' => $recentNotices
+            'notices' => $recentNotices,
+            'contactMessages' => $contactMessages
         ]);
     }
 }
