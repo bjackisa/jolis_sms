@@ -22,7 +22,7 @@ use App\Core\View;
     $appName = 'Jolis SMS';
     $appDescription = 'Jolis SMS is a comprehensive School Management System for Jolis ICT Academy.';
     $appUrl = defined('APP_URL') ? APP_URL : '';
-    $shareImage = $appUrl . '/assets/img/flogo.jpeg';
+    $shareImage = $appUrl . '/img/flogo.jpeg';
     ?>
 
     <meta name="description" content="<?= htmlspecialchars($appDescription) ?>">
@@ -39,8 +39,8 @@ use App\Core\View;
     <meta name="twitter:description" content="<?= htmlspecialchars($appDescription) ?>">
     <meta name="twitter:image" content="<?= htmlspecialchars($shareImage) ?>">
 
-    <link rel="icon" href="/assets/img/flogo.jpeg" type="image/jpeg">
-    <link rel="apple-touch-icon" href="/assets/img/flogo.jpeg">
+    <link rel="icon" href="/img/flogo.jpeg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="/img/flogo.jpeg">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@ use App\Core\View;
         <div class="auth-card animate__animated animate__fadeIn">
             <div class="auth-header">
                 <a href="/" class="auth-logo">
-                    <img src="/assets/img/flogo.jpeg" alt="Jolis SMS" style="height: 34px; width: auto;" class="me-2 rounded">
+                    <img src="/img/flogo.jpeg" alt="Jolis SMS" style="height: 34px; width: auto;" class="me-2 rounded">
                     <span>Jolis SMS</span>
                 </a>
                 <p class="text-muted">Jolis ICT Academy</p>
