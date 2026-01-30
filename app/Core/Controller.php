@@ -105,6 +105,61 @@ class Controller
         return $errors;
     }
 
+    protected function verifyRecaptcha(Request $request): bool
+    {
+        if (!defined('RECAPTCHA_SECRET_KEY') || RECAPTCHA_SECRET_KEY === '') {
+            return true;
+        }
+
+        $token = (string)$request->input('g-recaptcha-response');
+        if (trim($token) === '') {
+            $_SESSION['_errors'] = array_merge($_SESSION['_errors'] ?? [], [
+                'recaptcha' => ['Please confirm you are not a robot.']
+            ]);
+            return false;
+        }
+
+        $payload = http_build_query([
+            'secret' => RECAPTCHA_SECRET_KEY,
+            'response' => $token,
+            'remoteip' => $_SERVER['REMOTE_ADDR'] ?? null
+        ]);
+
+        $resultJson = null;
+
+        if (function_exists('curl_init')) {
+            $ch = curl_init('https://www.google.com/recaptcha/api/siteverify');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            $resultJson = curl_exec($ch);
+            curl_close($ch);
+        } else {
+            $context = stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'content' => $payload,
+                    'timeout' => 10
+                ]
+            ]);
+            $resultJson = @file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+        }
+
+        $result = json_decode((string)$resultJson, true);
+        $success = (bool)($result['success'] ?? false);
+
+        if (!$success) {
+            $_SESSION['_errors'] = array_merge($_SESSION['_errors'] ?? [], [
+                'recaptcha' => ['reCAPTCHA verification failed. Please try again.']
+            ]);
+            return false;
+        }
+
+        return true;
+    }
+
     private function validateRule(string $field, $value, string $rule, array $params, array $data): ?string
     {
         $fieldName = ucfirst(str_replace('_', ' ', $field));

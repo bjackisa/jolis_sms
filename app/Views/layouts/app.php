@@ -41,6 +41,10 @@ use App\Core\View;
 
     <link rel="icon" href="/img/flogo.jpeg" type="image/jpeg">
     <link rel="apple-touch-icon" href="/img/flogo.jpeg">
+
+    <?php if (defined('RECAPTCHA_SITE_KEY') && RECAPTCHA_SITE_KEY !== ''): ?>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <?php endif; ?>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

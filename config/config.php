@@ -22,6 +22,9 @@ define('SMTP_ENCRYPTION', Env::get('SMTP_ENCRYPTION', 'tls'));
 define('SMTP_FROM_EMAIL', Env::get('SMTP_FROM_EMAIL', ''));
 define('SMTP_FROM_NAME', Env::get('SMTP_FROM_NAME', 'Jolis SMS'));
 
+define('RECAPTCHA_SITE_KEY', Env::get('RECAPTCHA_SITE_KEY', ''));
+define('RECAPTCHA_SECRET_KEY', Env::get('RECAPTCHA_SECRET_KEY', ''));
+
 define('SESSION_LIFETIME', Env::get('SESSION_LIFETIME', 120));
 define('PASSWORD_COST', Env::get('PASSWORD_COST', 12));
 

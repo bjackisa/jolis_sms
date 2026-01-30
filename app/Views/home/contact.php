@@ -138,6 +138,15 @@ unset($_SESSION['_flash']['success']);
                                     <div class="invalid-feedback"><?= $error ?></div>
                                     <?php endif; ?>
                                 </div>
+
+                                <?php if (defined('RECAPTCHA_SITE_KEY') && RECAPTCHA_SITE_KEY !== ''): ?>
+                                <div class="col-12">
+                                    <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY) ?>"></div>
+                                    <?php if ($error = View::error('recaptcha')): ?>
+                                    <div class="text-danger small mt-2"><?= $error ?></div>
+                                    <?php endif; ?>
+                                </div>
+                                <?php endif; ?>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary px-4">
                                         <i class="bi bi-send me-2"></i>Send Message

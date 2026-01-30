@@ -61,6 +61,12 @@ class HomeController extends Controller
 
     public function sendContact(Request $request): void
     {
+        if (!$this->verifyRecaptcha($request)) {
+            $_SESSION['_old'] = $request->body();
+            $this->back();
+            return;
+        }
+
         $errors = $this->validate($request->body(), [
             'name' => 'required|min:2',
             'email' => 'required|email',

@@ -40,6 +40,15 @@ View::extend('layouts.auth');
         <i class="bi bi-shield-lock me-2"></i>Continue
     </button>
 
+    <?php if (defined('RECAPTCHA_SITE_KEY') && RECAPTCHA_SITE_KEY !== ''): ?>
+    <div class="mb-3">
+        <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY) ?>"></div>
+        <?php if ($error = View::error('recaptcha')): ?>
+        <div class="text-danger small mt-2"><?= $error ?></div>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
+
     <div class="alert alert-light border mb-0" role="alert">
         <small class="text-muted">
             If you didn't set a secret question, please use the reset link option or contact Support on
@@ -76,6 +85,15 @@ View::extend('layouts.auth');
     <button type="submit" class="btn btn-success w-100">
         <i class="bi bi-check-circle me-2"></i>Verify Answer
     </button>
+
+    <?php if (defined('RECAPTCHA_SITE_KEY') && RECAPTCHA_SITE_KEY !== ''): ?>
+    <div class="mt-3">
+        <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY) ?>"></div>
+        <?php if ($error = View::error('recaptcha')): ?>
+        <div class="text-danger small mt-2"><?= $error ?></div>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
 
     <div class="text-center mt-3">
         <a href="/forgot-password?mode=security&restart=1" class="text-decoration-none small">
@@ -121,6 +139,15 @@ View::extend('layouts.auth');
     <button type="submit" class="btn btn-primary w-100">
         <i class="bi bi-shield-check me-2"></i>Reset Password
     </button>
+
+    <?php if (defined('RECAPTCHA_SITE_KEY') && RECAPTCHA_SITE_KEY !== ''): ?>
+    <div class="mt-3">
+        <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY) ?>"></div>
+        <?php if ($error = View::error('recaptcha')): ?>
+        <div class="text-danger small mt-2"><?= $error ?></div>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
 </form>
 
 <?php endif; ?>
@@ -157,6 +184,15 @@ View::extend('layouts.auth');
     <button type="submit" class="btn btn-primary w-100 mb-3">
         <i class="bi bi-send me-2"></i>Send Reset Link
     </button>
+
+    <?php if (defined('RECAPTCHA_SITE_KEY') && RECAPTCHA_SITE_KEY !== ''): ?>
+    <div class="mb-3">
+        <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY) ?>"></div>
+        <?php if ($error = View::error('recaptcha')): ?>
+        <div class="text-danger small mt-2"><?= $error ?></div>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
     
     <div class="text-center">
         <a href="/login" class="text-decoration-none small">

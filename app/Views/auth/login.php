@@ -53,6 +53,15 @@ View::extend('layouts.auth');
         </div>
         <a href="/forgot-password" class="text-decoration-none small">Forgot password?</a>
     </div>
+
+    <?php if (defined('RECAPTCHA_SITE_KEY') && RECAPTCHA_SITE_KEY !== ''): ?>
+    <div class="mb-3">
+        <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars(RECAPTCHA_SITE_KEY) ?>"></div>
+        <?php if ($error = View::error('recaptcha')): ?>
+        <div class="text-danger small mt-2"><?= $error ?></div>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
     
     <button type="submit" class="btn btn-primary w-100 mb-3">
         <i class="bi bi-box-arrow-in-right me-2"></i>Sign In

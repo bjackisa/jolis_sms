@@ -30,6 +30,12 @@ class AuthController extends Controller
 
     public function login(Request $request): void
     {
+        if (!$this->verifyRecaptcha($request)) {
+            $_SESSION['_old'] = $request->body();
+            $this->back();
+            return;
+        }
+
         $errors = $this->validate($request->body(), [
             'email' => 'required|email',
             'password' => 'required|min:6'
@@ -124,6 +130,12 @@ class AuthController extends Controller
 
     public function forgotPasswordSecretQuestion(Request $request): void
     {
+        if (!$this->verifyRecaptcha($request)) {
+            $_SESSION['_old'] = $request->body();
+            $this->back();
+            return;
+        }
+
         $errors = $this->validate($request->body(), [
             'email' => 'required|email'
         ]);
@@ -161,6 +173,12 @@ class AuthController extends Controller
 
     public function verifyForgotPasswordSecretAnswer(Request $request): void
     {
+        if (!$this->verifyRecaptcha($request)) {
+            $_SESSION['_old'] = $request->body();
+            $this->back();
+            return;
+        }
+
         $errors = $this->validate($request->body(), [
             'email' => 'required|email',
             'secret_answer' => 'required|min:2'
@@ -207,6 +225,12 @@ class AuthController extends Controller
 
     public function resetPasswordWithSecretQuestion(Request $request): void
     {
+        if (!$this->verifyRecaptcha($request)) {
+            $_SESSION['_old'] = $request->body();
+            $this->back();
+            return;
+        }
+
         $errors = $this->validate($request->body(), [
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed'
@@ -256,6 +280,12 @@ class AuthController extends Controller
 
     public function forgotPassword(Request $request): void
     {
+        if (!$this->verifyRecaptcha($request)) {
+            $_SESSION['_old'] = $request->body();
+            $this->back();
+            return;
+        }
+
         $errors = $this->validate($request->body(), [
             'email' => 'required|email'
         ]);
