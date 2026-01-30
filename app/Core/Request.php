@@ -25,7 +25,9 @@ class Request
         
         $scriptName = dirname($_SERVER['SCRIPT_NAME']);
         if ($scriptName !== '/' && $scriptName !== '\\') {
-            $uri = substr($uri, strlen($scriptName));
+            if (strpos($uri, $scriptName) === 0) {
+                $uri = substr($uri, strlen($scriptName));
+            }
         }
         
         if (strpos($uri, '?') !== false) {
