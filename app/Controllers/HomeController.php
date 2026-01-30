@@ -55,7 +55,7 @@ class HomeController extends Controller
             'schoolName' => Setting::get('school_name', 'Jolis ICT Academy'),
             'schoolEmail' => Setting::get('school_email', 'info@jolis.academy'),
             'schoolPhone' => Setting::get('school_phone', '+256702860347'),
-            'schoolAddress' => Setting::get('school_address', 'Akright City, Entebbe, Wakiso')
+            'schoolAddress' => Setting::get('school_address', 'Akright City, Entebbe')
         ]);
     }
 
