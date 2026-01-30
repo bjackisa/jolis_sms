@@ -174,17 +174,23 @@ View::extend('layouts.dashboard');
 <?php View::section('scripts'); ?>
 <script>
 $(document).ready(function() {
-    var table = $('#studentsTable').DataTable({
-        pageLength: 25,
-        order: [[2, 'asc']],
-        columnDefs: [
-            { orderable: false, targets: [6] }
-        ]
-    });
+    var table = null;
+    
+    if (!$('#studentsTable tbody tr td[colspan]').length) {
+        table = $('#studentsTable').DataTable({
+            pageLength: 25,
+            order: [[2, 'asc']],
+            columnDefs: [
+                { orderable: false, targets: [6] }
+            ]
+        });
+    }
     
     // Class filter
     $('#classFilter').on('change', function() {
-        table.column(4).search(this.value).draw();
+        if (table) {
+            table.column(4).search(this.value).draw();
+        }
     });
     
     // Export CSV
