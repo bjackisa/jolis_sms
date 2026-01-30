@@ -57,21 +57,47 @@ body {
 }
 
 /* Footer text visibility on dark background */
-footer.bg-dark .text-muted,
-footer.bg-dark p.text-muted,
-footer.bg-dark ul.text-muted li,
-footer.bg-dark .list-unstyled.text-muted li,
+footer.bg-dark .text-muted {
+    color: #e0e0e0 !important;
+}
+
+footer.bg-dark p.text-muted {
+    color: #e0e0e0 !important;
+}
+
+footer.bg-dark ul.text-muted li {
+    color: #e0e0e0 !important;
+}
+
+footer.bg-dark .list-unstyled.text-muted li {
+    color: #e0e0e0 !important;
+}
+
 footer.bg-dark .list-unstyled li {
     color: #e0e0e0 !important;
 }
 
-footer.bg-dark a.text-muted,
+footer.bg-dark a.text-muted {
+    color: #e0e0e0 !important;
+}
+
 footer.bg-dark .list-unstyled a {
     color: #e0e0e0 !important;
 }
 
-footer.bg-dark a.text-muted:hover,
+footer.bg-dark a.text-muted:hover {
+    color: #ffffff !important;
+}
+
 footer.bg-dark .list-unstyled a:hover {
+    color: #ffffff !important;
+}
+
+footer.bg-dark .d-flex a.text-muted {
+    color: #e0e0e0 !important;
+}
+
+footer.bg-dark .d-flex a.text-muted:hover {
     color: #ffffff !important;
 }
 

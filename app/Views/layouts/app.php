@@ -27,7 +27,7 @@ use App\Core\View;
     <!-- Animate.css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style.css?v=<?= time() ?>" rel="stylesheet">
     
     <?= View::yield('styles') ?>
 </head>
@@ -68,14 +68,14 @@ use App\Core\View;
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-light py-5 mt-5">
+    <footer class="bg-dark text-light py-5 mt-5" style="color: #e0e0e0 !important;">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
                     <h5 class="fw-bold mb-3">
                         <i class="bi bi-mortarboard-fill me-2"></i>Jolis SMS
                     </h5>
-                    <p class="text-muted">
+                    <p style="color: #e0e0e0;">
                         A comprehensive School Management System for Jolis ICT Academy. 
                         Managing education with excellence and technology.
                     </p>
@@ -83,15 +83,15 @@ use App\Core\View;
                 <div class="col-lg-2">
                     <h6 class="fw-bold mb-3">Quick Links</h6>
                     <ul class="list-unstyled">
-                        <li><a href="/" class="text-muted text-decoration-none">Home</a></li>
-                        <li><a href="/about" class="text-muted text-decoration-none">About</a></li>
-                        <li><a href="/contact" class="text-muted text-decoration-none">Contact</a></li>
-                        <li><a href="/login" class="text-muted text-decoration-none">Login</a></li>
+                        <li><a href="/" class="text-decoration-none" style="color: #e0e0e0;">Home</a></li>
+                        <li><a href="/about" class="text-decoration-none" style="color: #e0e0e0;">About</a></li>
+                        <li><a href="/contact" class="text-decoration-none" style="color: #e0e0e0;">Contact</a></li>
+                        <li><a href="/login" class="text-decoration-none" style="color: #e0e0e0;">Login</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
                     <h6 class="fw-bold mb-3">Contact Info</h6>
-                    <ul class="list-unstyled text-muted">
+                    <ul class="list-unstyled" style="color: #e0e0e0;">
                         <li><i class="bi bi-geo-alt me-2"></i>Kampala, Uganda</li>
                         <li><i class="bi bi-telephone me-2"></i>+256 700 000 000</li>
                         <li><i class="bi bi-envelope me-2"></i>info@jolis.academy</li>
@@ -100,23 +100,23 @@ use App\Core\View;
                 <div class="col-lg-3">
                     <h6 class="fw-bold mb-3">Follow Us</h6>
                     <div class="d-flex gap-3">
-                        <a href="#" class="text-muted fs-4"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-muted fs-4"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="text-muted fs-4"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="text-muted fs-4"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="fs-4" style="color: #e0e0e0;"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="fs-4" style="color: #e0e0e0;"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="fs-4" style="color: #e0e0e0;"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="fs-4" style="color: #e0e0e0;"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
             </div>
             <hr class="my-4 border-secondary">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0 text-muted small">
+                    <p class="mb-0 small" style="color: #e0e0e0;">
                         &copy; <?= date('Y') ?> Jolis ICT Academy. All rights reserved.
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0 text-muted small">
-                        Developed by <a href="https://jackisa.com" class="text-primary text-decoration-none" target="_blank">Jackisa Daniel Barack</a>
+                    <p class="mb-0 small" style="color: #e0e0e0;">
+                        Developed by <a href="https://jackisa.com" class="text-decoration-none" style="color: #0d6efd;" target="_blank">Jackisa Daniel Barack</a>
                     </p>
                 </div>
             </div>
