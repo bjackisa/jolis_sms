@@ -1,0 +1,25 @@
+{
+    "name": "jolis/sms",
+    "description": "Jolis SMS - School Management System for Jolis ICT Academy",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Jackisa Daniel Barack",
+            "email": "barackdanieljackisa@gmail.com",
+            "homepage": "https://jackisa.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "phpmailer/phpmailer": "^6.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}
