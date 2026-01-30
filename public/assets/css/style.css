@@ -45,6 +45,17 @@ body {
     overflow: hidden;
 }
 
+.hero-section p,
+.hero-section .lead {
+    color: #ffffff !important;
+}
+
+/* CTA Section text */
+.bg-primary.text-white p,
+.bg-primary.text-white .lead {
+    color: #ffffff !important;
+}
+
 .hero-section::before {
     content: '';
     position: absolute;

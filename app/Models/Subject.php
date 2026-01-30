@@ -65,4 +65,14 @@ class Subject extends Model
     {
         return self::whereMultiple(['level_id' => $levelId, 'is_compulsory' => 1]);
     }
+
+    public static function allWithLevel(): array
+    {
+        $sql = "SELECT s.id, s.name, s.code, l.code as level_code
+                FROM subjects s
+                JOIN levels l ON s.level_id = l.id
+                WHERE s.status = 'active'
+                ORDER BY l.code, s.name";
+        return self::raw($sql);
+    }
 }

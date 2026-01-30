@@ -27,14 +27,18 @@ $router->group(['prefix' => 'instructor', 'middleware' => ['InstructorMiddleware
     
     // Classes
     $router->get('/classes', 'Instructor\ClassController@index');
+    $router->post('/classes/assign', 'Instructor\ClassController@assign');
+    $router->post('/classes/remove/{id}', 'Instructor\ClassController@remove');
     $router->get('/classes/{id}', 'Instructor\ClassController@show');
     
     // Students
     $router->get('/students', 'Instructor\StudentController@index');
+    $router->post('/students/add', 'Instructor\StudentController@add');
     $router->get('/students/{id}', 'Instructor\StudentController@show');
     
     // Subjects
     $router->get('/subjects', 'Instructor\SubjectController@index');
+    $router->post('/subjects/assign', 'Instructor\SubjectController@assign');
     
     // Exams
     $router->get('/exams', 'Instructor\ExamController@index');

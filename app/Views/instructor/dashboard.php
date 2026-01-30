@@ -30,8 +30,8 @@ View::extend('layouts.dashboard');
 
 <!-- Stats Cards -->
 <div class="row g-4 mb-4">
-    <div class="col-md-3 col-6">
-        <div class="card border-0 shadow-sm bg-primary text-white">
+    <div class="col-lg col-md-4 col-6">
+        <div class="card border-0 shadow-sm bg-primary text-white h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -44,13 +44,32 @@ View::extend('layouts.dashboard');
                 </div>
             </div>
             <a href="/instructor/classes" class="card-footer bg-transparent border-0 text-white text-decoration-none d-flex justify-content-between align-items-center">
-                <span>View Details</span>
+                <span>Manage</span>
                 <i class="bi bi-arrow-right"></i>
             </a>
         </div>
     </div>
-    <div class="col-md-3 col-6">
-        <div class="card border-0 shadow-sm bg-success text-white">
+    <div class="col-lg col-md-4 col-6">
+        <div class="card border-0 shadow-sm bg-secondary text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="fw-bold mb-0"><?= $stats['subjects'] ?? 0 ?></h3>
+                        <p class="mb-0 opacity-75">My Subjects</p>
+                    </div>
+                    <div class="opacity-50">
+                        <i class="bi bi-book fs-1"></i>
+                    </div>
+                </div>
+            </div>
+            <a href="/instructor/subjects" class="card-footer bg-transparent border-0 text-white text-decoration-none d-flex justify-content-between align-items-center">
+                <span>Manage</span>
+                <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg col-md-4 col-6">
+        <div class="card border-0 shadow-sm bg-success text-white h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -63,13 +82,13 @@ View::extend('layouts.dashboard');
                 </div>
             </div>
             <a href="/instructor/students" class="card-footer bg-transparent border-0 text-white text-decoration-none d-flex justify-content-between align-items-center">
-                <span>View Details</span>
+                <span>Manage</span>
                 <i class="bi bi-arrow-right"></i>
             </a>
         </div>
     </div>
-    <div class="col-md-3 col-6">
-        <div class="card border-0 shadow-sm bg-warning text-white">
+    <div class="col-lg col-md-6 col-6">
+        <div class="card border-0 shadow-sm bg-warning text-white h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -82,13 +101,13 @@ View::extend('layouts.dashboard');
                 </div>
             </div>
             <a href="/instructor/exams" class="card-footer bg-transparent border-0 text-white text-decoration-none d-flex justify-content-between align-items-center">
-                <span>View Details</span>
+                <span>View</span>
                 <i class="bi bi-arrow-right"></i>
             </a>
         </div>
     </div>
-    <div class="col-md-3 col-6">
-        <div class="card border-0 shadow-sm bg-info text-white">
+    <div class="col-lg col-md-6 col-6">
+        <div class="card border-0 shadow-sm bg-info text-white h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -101,7 +120,7 @@ View::extend('layouts.dashboard');
                 </div>
             </div>
             <a href="/instructor/homework" class="card-footer bg-transparent border-0 text-white text-decoration-none d-flex justify-content-between align-items-center">
-                <span>View Details</span>
+                <span>View</span>
                 <i class="bi bi-arrow-right"></i>
             </a>
         </div>

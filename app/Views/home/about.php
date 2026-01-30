@@ -62,54 +62,111 @@ View::extend('layouts.app');
     </div>
 </section>
 
-<!-- Academic Structure -->
+<!-- Uganda Education System -->
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold">Academic Structure</h2>
-            <p class="text-muted">Our comprehensive secondary education program</p>
+            <h2 class="fw-bold">Uganda's Education System</h2>
+            <p class="text-muted">Understanding the national curriculum and examination structure</p>
         </div>
         
         <div class="row g-4">
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-success text-white">
-                        <h5 class="mb-0"><i class="bi bi-mortarboard me-2"></i>O'Level (UCE)</h5>
+                        <h5 class="mb-0"><i class="bi bi-mortarboard me-2"></i>O'Level (UCE) - Senior 1 to 4</h5>
                     </div>
                     <div class="card-body">
                         <p class="text-muted">
-                            Ordinary Level education covering Senior 1 to Senior 4, culminating in the 
-                            Uganda Certificate of Education (UCE) examination set by UNEB.
+                            The Uganda Certificate of Education (UCE) is a national examination administered by 
+                            the Uganda National Examinations Board (UNEB) at the end of Senior 4.
                         </p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Senior 1 (S1)</li>
-                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Senior 2 (S2)</li>
-                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Senior 3 (S3)</li>
-                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Senior 4 (S4)</li>
-                        </ul>
-                        <p class="small text-muted mb-0">
-                            <strong>Grading:</strong> D1 (Distinction) to F9 (Fail)
-                        </p>
+                        <h6 class="fw-bold mt-3">Core Subjects</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="list-unstyled small">
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>English Language</li>
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>Mathematics</li>
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>Physics</li>
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>Chemistry</li>
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>Biology</li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-unstyled small">
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>Geography</li>
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>History</li>
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>CRE/IRE</li>
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>Agriculture</li>
+                                    <li class="mb-1"><i class="bi bi-check text-success me-1"></i>Computer Studies</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-3 p-2 bg-light rounded">
+                            <strong class="small">Grading Scale:</strong>
+                            <span class="small text-muted">D1 (80-100%), D2 (75-79%), C3 (70-74%), C4 (65-69%), C5 (60-64%), C6 (55-59%), P7 (50-54%), P8 (45-49%), F9 (0-44%)</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="bi bi-award me-2"></i>A'Level (UACE)</h5>
+                        <h5 class="mb-0"><i class="bi bi-award me-2"></i>A'Level (UACE) - Senior 5 to 6</h5>
                     </div>
                     <div class="card-body">
                         <p class="text-muted">
-                            Advanced Level education covering Senior 5 and Senior 6, culminating in the 
-                            Uganda Advanced Certificate of Education (UACE) examination set by UNEB.
+                            The Uganda Advanced Certificate of Education (UACE) is taken at the end of Senior 6. 
+                            Students specialize in 3-4 principal subjects plus 2 subsidiary subjects.
                         </p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="bi bi-check-circle text-primary me-2"></i>Senior 5 (S5)</li>
-                            <li class="mb-2"><i class="bi bi-check-circle text-primary me-2"></i>Senior 6 (S6)</li>
+                        <h6 class="fw-bold mt-3">Subject Combinations</h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2"><i class="bi bi-bookmark text-primary me-1"></i><strong>Sciences:</strong> PCM (Physics, Chemistry, Math), PCB (Physics, Chemistry, Biology), BCM</li>
+                            <li class="mb-2"><i class="bi bi-bookmark text-primary me-1"></i><strong>Arts:</strong> HEG (History, Economics, Geography), HED, HEL (Literature)</li>
+                            <li class="mb-2"><i class="bi bi-bookmark text-primary me-1"></i><strong>Technical:</strong> MEK (Math, Economics, Entrepreneurship), Computer Science combinations</li>
                         </ul>
-                        <p class="small text-muted mb-0">
-                            <strong>Grading:</strong> A (Excellent) to F (Fail)
-                        </p>
+                        <h6 class="fw-bold mt-3">Subsidiary Subjects</h6>
+                        <p class="small text-muted mb-2">General Paper (compulsory) + one other (ICT, Sub-Math, etc.)</p>
+                        <div class="mt-3 p-2 bg-light rounded">
+                            <strong class="small">Grading Scale:</strong>
+                            <span class="small text-muted">A (80-100%), B (70-79%), C (60-69%), D (50-59%), E (40-49%), O (35-39%), F (0-34%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Academic Calendar -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0"><i class="bi bi-calendar3 me-2"></i>Uganda Academic Calendar</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-primary">Term I</h6>
+                                    <p class="small text-muted mb-0">February - May</p>
+                                    <p class="small text-muted mb-0">(~14 weeks)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-success">Term II</h6>
+                                    <p class="small text-muted mb-0">June - August</p>
+                                    <p class="small text-muted mb-0">(~12 weeks)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded">
+                                    <h6 class="fw-bold text-warning">Term III</h6>
+                                    <p class="small text-muted mb-0">September - December</p>
+                                    <p class="small text-muted mb-0">(~12 weeks + UNEB exams)</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
