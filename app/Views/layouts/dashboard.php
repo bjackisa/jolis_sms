@@ -36,6 +36,30 @@ if ($isInstructor && class_exists(ContactMessage::class)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Dashboard - Jolis SMS' ?></title>
+
+    <?php
+    $appName = 'Jolis SMS';
+    $appDescription = 'Jolis SMS is a comprehensive School Management System for Jolis ICT Academy.';
+    $appUrl = defined('APP_URL') ? APP_URL : '';
+    $shareImage = $appUrl . '/assets/img/flogo.jpeg';
+    ?>
+
+    <meta name="description" content="<?= htmlspecialchars($appDescription) ?>">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?= htmlspecialchars($appName) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($appDescription) ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($appUrl ?: '/') ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($shareImage) ?>">
+    <meta property="og:image:alt" content="<?= htmlspecialchars($appName) ?>">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($appName) ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($appDescription) ?>">
+    <meta name="twitter:image" content="<?= htmlspecialchars($shareImage) ?>">
+
+    <link rel="icon" href="/assets/img/flogo.jpeg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="/assets/img/flogo.jpeg">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +84,7 @@ if ($isInstructor && class_exists(ContactMessage::class)) {
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="<?= $dashboardPrefix ?>/dashboard" class="sidebar-brand">
-                <i class="bi bi-mortarboard-fill"></i>
+                <img src="/assets/img/flogo.jpeg" alt="Jolis SMS" style="height: 28px; width: auto;" class="me-2 rounded">
                 <span>Jolis SMS</span>
             </a>
             <button class="sidebar-toggle d-lg-none" id="sidebarClose">

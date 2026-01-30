@@ -17,6 +17,30 @@ use App\Core\View;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Jolis SMS' ?></title>
+
+    <?php
+    $appName = 'Jolis SMS';
+    $appDescription = 'Jolis SMS is a comprehensive School Management System for Jolis ICT Academy.';
+    $appUrl = defined('APP_URL') ? APP_URL : '';
+    $shareImage = $appUrl . '/assets/img/flogo.jpeg';
+    ?>
+
+    <meta name="description" content="<?= htmlspecialchars($appDescription) ?>">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?= htmlspecialchars($appName) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($appDescription) ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($appUrl ?: '/') ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($shareImage) ?>">
+    <meta property="og:image:alt" content="<?= htmlspecialchars($appName) ?>">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($appName) ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($appDescription) ?>">
+    <meta name="twitter:image" content="<?= htmlspecialchars($shareImage) ?>">
+
+    <link rel="icon" href="/assets/img/flogo.jpeg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="/assets/img/flogo.jpeg">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +60,8 @@ use App\Core\View;
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="/">
-                <i class="bi bi-mortarboard-fill me-2"></i>Jolis SMS
+                <img src="/assets/img/flogo.jpeg" alt="Jolis SMS" style="height: 32px; width: auto;" class="me-2 rounded">
+                Jolis SMS
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -73,7 +98,8 @@ use App\Core\View;
             <div class="row g-4">
                 <div class="col-lg-4">
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-mortarboard-fill me-2"></i>Jolis SMS
+                        <img src="/assets/img/flogo.jpeg" alt="Jolis SMS" style="height: 28px; width: auto;" class="me-2 rounded">
+                        Jolis SMS
                     </h5>
                     <p style="color: #e0e0e0;">
                         A comprehensive School Management System for Jolis ICT Academy. 
