@@ -86,13 +86,39 @@ class AuthController extends Controller
 
     public function showForgotPassword(Request $request): void
     {
+        $mode = (string)$request->query('mode', 'email');
+        if (!in_array($mode, ['email', 'security'], true)) {
+            $mode = 'email';
+        }
+
+        if ($mode === 'security' && (string)$request->query('restart') === '1') {
+            unset(
+                $_SESSION['forgot_secret_email'],
+                $_SESSION['forgot_secret_question'],
+                $_SESSION['forgot_secret_verified']
+            );
+            $this->redirect('/forgot-password?mode=security');
+            return;
+        }
+
         $secretEmail = $_SESSION['forgot_secret_email'] ?? null;
         $secretQuestion = $_SESSION['forgot_secret_question'] ?? null;
+        $secretVerified = (bool)($_SESSION['forgot_secret_verified'] ?? false);
+
+        $securityStep = 'lookup';
+        if (!empty($secretEmail) && !empty($secretQuestion) && !$secretVerified) {
+            $securityStep = 'answer';
+        }
+        if (!empty($secretEmail) && !empty($secretQuestion) && $secretVerified) {
+            $securityStep = 'new_password';
+        }
 
         $this->view('auth.forgot-password', [
             'title' => 'Forgot Password - Jolis SMS',
+            'mode' => $mode,
             'secretEmail' => $secretEmail,
-            'secretQuestion' => $secretQuestion
+            'secretQuestion' => $secretQuestion,
+            'securityStep' => $securityStep
         ]);
     }
 
@@ -111,33 +137,33 @@ class AuthController extends Controller
         $email = (string)$request->input('email');
         $user = User::findByEmail($email);
 
-        unset($_SESSION['forgot_secret_email'], $_SESSION['forgot_secret_question']);
+        unset($_SESSION['forgot_secret_email'], $_SESSION['forgot_secret_question'], $_SESSION['forgot_secret_verified']);
 
         if (!$user) {
             $this->flash('error', 'No account found for that email.');
-            $this->redirect('/forgot-password');
+            $this->redirect('/forgot-password?mode=security');
             return;
         }
 
         $security = UserSecurity::findByUserId((int)$user['id']);
         if (!$security) {
             $this->flash('error', 'No security question set. Please try the reset link option or contact Support on barackdanieljackisa@gmail.com.');
-            $this->redirect('/forgot-password');
+            $this->redirect('/forgot-password?mode=security');
             return;
         }
 
         $_SESSION['forgot_secret_email'] = $email;
         $_SESSION['forgot_secret_question'] = $security['secret_question'];
+        $_SESSION['forgot_secret_verified'] = false;
 
-        $this->redirect('/forgot-password');
+        $this->redirect('/forgot-password?mode=security');
     }
 
-    public function resetPasswordWithSecretQuestion(Request $request): void
+    public function verifyForgotPasswordSecretAnswer(Request $request): void
     {
         $errors = $this->validate($request->body(), [
             'email' => 'required|email',
-            'secret_answer' => 'required|min:2',
-            'password' => 'required|min:8|confirmed'
+            'secret_answer' => 'required|min:2'
         ]);
 
         if (!empty($errors)) {
@@ -148,19 +174,18 @@ class AuthController extends Controller
 
         $email = (string)$request->input('email');
         $answer = strtolower(trim((string)$request->input('secret_answer')));
-        $password = (string)$request->input('password');
 
         $user = User::findByEmail($email);
         if (!$user) {
             $this->flash('error', 'No account found for that email.');
-            $this->redirect('/forgot-password');
+            $this->redirect('/forgot-password?mode=security');
             return;
         }
 
         $security = UserSecurity::findByUserId((int)$user['id']);
         if (!$security) {
             $this->flash('error', 'No security question set. Please try the reset link option or contact Support on barackdanieljackisa@gmail.com.');
-            $this->redirect('/forgot-password');
+            $this->redirect('/forgot-password?mode=email');
             return;
         }
 
@@ -168,7 +193,54 @@ class AuthController extends Controller
             $this->flash('error', 'Incorrect secret answer.');
             $_SESSION['forgot_secret_email'] = $email;
             $_SESSION['forgot_secret_question'] = $security['secret_question'];
-            $this->redirect('/forgot-password');
+            $_SESSION['forgot_secret_verified'] = false;
+            $this->redirect('/forgot-password?mode=security');
+            return;
+        }
+
+        $_SESSION['forgot_secret_email'] = $email;
+        $_SESSION['forgot_secret_question'] = $security['secret_question'];
+        $_SESSION['forgot_secret_verified'] = true;
+
+        $this->redirect('/forgot-password?mode=security');
+    }
+
+    public function resetPasswordWithSecretQuestion(Request $request): void
+    {
+        $errors = $this->validate($request->body(), [
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed'
+        ]);
+
+        if (!empty($errors)) {
+            $_SESSION['_errors'] = $errors;
+            $this->back();
+            return;
+        }
+
+        $email = (string)$request->input('email');
+        $password = (string)$request->input('password');
+
+        $sessionEmail = (string)($_SESSION['forgot_secret_email'] ?? '');
+        $verified = (bool)($_SESSION['forgot_secret_verified'] ?? false);
+
+        if (!$verified || empty($sessionEmail) || $sessionEmail !== $email) {
+            $this->flash('error', 'Please verify your secret answer first.');
+            $this->redirect('/forgot-password?mode=security');
+            return;
+        }
+
+        $user = User::findByEmail($email);
+        if (!$user) {
+            $this->flash('error', 'No account found for that email.');
+            $this->redirect('/forgot-password?mode=security');
+            return;
+        }
+
+        $security = UserSecurity::findByUserId((int)$user['id']);
+        if (!$security) {
+            $this->flash('error', 'No security question set. Please try the reset link option or contact Support on barackdanieljackisa@gmail.com.');
+            $this->redirect('/forgot-password?mode=email');
             return;
         }
 
@@ -176,7 +248,7 @@ class AuthController extends Controller
         $hashedPassword = Auth::hashPassword($password);
         $db->query("UPDATE users SET password = ? WHERE id = ?", [$hashedPassword, $user['id']]);
 
-        unset($_SESSION['forgot_secret_email'], $_SESSION['forgot_secret_question']);
+        unset($_SESSION['forgot_secret_email'], $_SESSION['forgot_secret_question'], $_SESSION['forgot_secret_verified']);
 
         $this->flash('success', 'Your password has been reset successfully. Please login.');
         $this->redirect('/login');

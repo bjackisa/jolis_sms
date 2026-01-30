@@ -16,6 +16,7 @@ $router->group(['prefix' => '', 'middleware' => ['GuestMiddleware']], function (
     $router->get('/forgot-password', 'AuthController@showForgotPassword');
     $router->post('/forgot-password', 'AuthController@forgotPassword');
     $router->post('/forgot-password/secret-question', 'AuthController@forgotPasswordSecretQuestion');
+    $router->post('/forgot-password/secret-verify', 'AuthController@verifyForgotPasswordSecretAnswer');
     $router->post('/forgot-password/secret-reset', 'AuthController@resetPasswordWithSecretQuestion');
     $router->get('/reset-password/{token}', 'AuthController@showResetPassword');
     $router->post('/reset-password', 'AuthController@resetPassword');
