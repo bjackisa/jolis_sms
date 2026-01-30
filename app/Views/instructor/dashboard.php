@@ -292,13 +292,13 @@ View::extend('layouts.dashboard');
                     <?php foreach (array_slice($contactMessages, 0, 5) as $message): ?>
                     <a href="/instructor/contact-messages/<?= $message['id'] ?>" class="list-group-item list-group-item-action px-0 border-0">
                         <div class="d-flex justify-content-between align-items-start">
-                            <div class="flex-grow-1">
+                            <div class="flex-grow-1" style="min-width: 0;">
                                 <div class="d-flex align-items-center mb-1">
                                     <h6 class="mb-0 fw-semibold me-2"><?= htmlspecialchars($message['name']) ?></h6>
                                     <span class="badge bg-danger">New</span>
                                 </div>
-                                <p class="text-muted small mb-1"><strong>Subject:</strong> <?= htmlspecialchars($message['subject']) ?></p>
-                                <p class="text-muted small mb-1"><?= substr(htmlspecialchars($message['message']), 0, 80) ?>...</p>
+                                <p class="text-muted small mb-1 text-truncate"><strong>Subject:</strong> <?= htmlspecialchars($message['subject']) ?></p>
+                                <p class="text-muted small mb-1 text-truncate"><?= substr(htmlspecialchars($message['message']), 0, 80) ?>...</p>
                                 <small class="text-muted">
                                     <i class="bi bi-clock me-1"></i>
                                     <?= date('M d, Y H:i', strtotime($message['created_at'])) ?>

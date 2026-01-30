@@ -11,11 +11,24 @@
 
 use App\Core\View;
 use App\Core\Auth;
+use App\Models\ContactMessage;
 
 $currentUser = Auth::user();
 $role = Auth::role();
 $isInstructor = $role === 'instructor';
 $dashboardPrefix = $isInstructor ? '/instructor' : '/student';
+
+$topbarContactMessages = [];
+$topbarContactCount = 0;
+if ($isInstructor && class_exists(ContactMessage::class)) {
+    try {
+        $topbarContactMessages = ContactMessage::getNew();
+        $topbarContactCount = count($topbarContactMessages);
+    } catch (\Throwable $e) {
+        $topbarContactMessages = [];
+        $topbarContactCount = 0;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -188,15 +201,41 @@ $dashboardPrefix = $isInstructor ? '/instructor' : '/student';
                 <div class="dropdown">
                     <button class="btn btn-link position-relative" data-bs-toggle="dropdown">
                         <i class="bi bi-bell fs-5"></i>
+                        <?php if ($isInstructor && $topbarContactCount > 0): ?>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
-                            3
+                            <?= $topbarContactCount ?>
                         </span>
+                        <?php endif; ?>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end notification-dropdown">
                         <h6 class="dropdown-header">Notifications</h6>
-                        <a class="dropdown-item" href="#">
-                            <small class="text-muted">No new notifications</small>
-                        </a>
+                        <?php if ($isInstructor): ?>
+                            <?php if ($topbarContactCount === 0): ?>
+                            <div class="dropdown-item">
+                                <small class="text-muted">No new messages</small>
+                            </div>
+                            <?php else: ?>
+                                <?php foreach (array_slice($topbarContactMessages, 0, 5) as $msg): ?>
+                                <a class="dropdown-item" href="<?= $dashboardPrefix ?>/contact-messages/<?= (int)$msg['id'] ?>">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div style="min-width: 0;">
+                                            <div class="fw-semibold text-truncate"><?= htmlspecialchars($msg['name']) ?></div>
+                                            <small class="text-muted text-truncate d-block"><?= htmlspecialchars($msg['subject']) ?></small>
+                                        </div>
+                                        <span class="badge bg-danger ms-2">New</span>
+                                    </div>
+                                </a>
+                                <?php endforeach; ?>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-center" href="<?= $dashboardPrefix ?>/contact-messages">
+                                    <small class="fw-semibold">View all messages</small>
+                                </a>
+                            <?php endif; ?>
+                        <?php else: ?>
+                        <div class="dropdown-item">
+                            <small class="text-muted">No notifications</small>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 
