@@ -26,8 +26,10 @@ class View
         if (self::$layout) {
             $layout = self::$layout;
             self::$layout = null;
-            
-            self::$sections['content'] = $content;
+
+            if (!isset(self::$sections['content'])) {
+                self::$sections['content'] = $content;
+            }
             
             return self::render($layout, array_merge($data, self::$layoutData));
         }
