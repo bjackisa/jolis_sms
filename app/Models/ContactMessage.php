@@ -19,34 +19,34 @@ class ContactMessage extends Model
 
     public static function getNew(): array
     {
-        return self::all("status = 'new'", [], "created_at DESC");
+        return self::raw(
+            "SELECT * FROM " . static::$table . " WHERE status = ? ORDER BY " . static::$primaryKey . " DESC",
+            ['new']
+        );
     }
 
     public static function getAll(): array
     {
-        return self::all("1=1", [], "created_at DESC");
+        return self::all();
     }
 
     public static function markAsRead(int $id): bool
     {
-        $db = self::getDb();
-        return $db->update(self::$table, ['status' => 'read'], "id = ?", [$id]);
+        return static::update($id, ['status' => 'read']) > 0;
     }
 
     public static function markAsReplied(int $id): bool
     {
-        $db = self::getDb();
-        return $db->update(self::$table, ['status' => 'replied'], "id = ?", [$id]);
+        return static::update($id, ['status' => 'replied']) > 0;
     }
 
     public static function deleteMessage(int $id): bool
     {
-        $db = self::getDb();
-        return $db->delete(self::$table, "id = ?", [$id]);
+        return static::delete($id) > 0;
     }
 
     public static function countNew(): int
     {
-        return self::count("status = 'new'");
+        return static::count('status = ?', ['new']);
     }
 }
