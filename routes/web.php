@@ -15,6 +15,8 @@ $router->group(['prefix' => '', 'middleware' => ['GuestMiddleware']], function (
     $router->post('/login', 'AuthController@login');
     $router->get('/forgot-password', 'AuthController@showForgotPassword');
     $router->post('/forgot-password', 'AuthController@forgotPassword');
+    $router->post('/forgot-password/secret-question', 'AuthController@forgotPasswordSecretQuestion');
+    $router->post('/forgot-password/secret-reset', 'AuthController@resetPasswordWithSecretQuestion');
     $router->get('/reset-password/{token}', 'AuthController@showResetPassword');
     $router->post('/reset-password', 'AuthController@resetPassword');
 });
@@ -96,6 +98,7 @@ $router->group(['prefix' => 'instructor', 'middleware' => ['InstructorMiddleware
     $router->get('/profile', 'Instructor\ProfileController@index');
     $router->post('/profile', 'Instructor\ProfileController@update');
     $router->post('/profile/password', 'Instructor\ProfileController@updatePassword');
+    $router->post('/profile/security', 'Instructor\ProfileController@updateSecurity');
 });
 
 // Student Routes
@@ -124,4 +127,5 @@ $router->group(['prefix' => 'student', 'middleware' => ['StudentMiddleware']], f
     $router->get('/profile', 'Student\ProfileController@index');
     $router->post('/profile', 'Student\ProfileController@update');
     $router->post('/profile/password', 'Student\ProfileController@updatePassword');
+    $router->post('/profile/security', 'Student\ProfileController@updateSecurity');
 });

@@ -122,6 +122,43 @@ View::extend('layouts.dashboard');
                 </form>
             </div>
         </div>
+
+        <div class="card border-0 shadow-sm mt-4">
+            <div class="card-header bg-transparent border-0">
+                <h5 class="fw-bold mb-0">Security Question</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small mb-3">
+                    Set a secret question to help you reset your password if you can't access your email.
+                </p>
+                <form action="/instructor/profile/security" method="POST">
+                    <?= View::csrf() ?>
+                    
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label">Secret Question</label>
+                            <input type="text" name="secret_question" class="form-control <?= View::hasError('secret_question') ? 'is-invalid' : '' ?>" value="<?= htmlspecialchars($security['secret_question'] ?? '') ?>" placeholder="e.g. What is the name of your first school?" required>
+                            <?php if ($error = View::error('secret_question')): ?>
+                            <div class="invalid-feedback d-block"><?= $error ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Secret Answer</label>
+                            <input type="password" name="secret_answer" class="form-control <?= View::hasError('secret_answer') ? 'is-invalid' : '' ?>" placeholder="Enter your answer" required>
+                            <?php if ($error = View::error('secret_answer')): ?>
+                            <div class="invalid-feedback d-block"><?= $error ?></div>
+                            <?php endif; ?>
+                            <div class="form-text">Answer is not shown again and is stored securely.</div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-info text-white">
+                                <i class="bi bi-shield-lock me-1"></i>Save Security Question
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <?php View::endSection(); ?>

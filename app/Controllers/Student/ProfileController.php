@@ -17,6 +17,7 @@ use App\Core\Auth;
 use App\Core\Database;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\UserSecurity;
 
 class ProfileController extends Controller
 {
@@ -25,12 +26,14 @@ class ProfileController extends Controller
         $user = Auth::user();
         $student = Student::findByUserId($user['id']);
         $enrollment = $student ? Student::getCurrentEnrollment($student['id']) : null;
+        $security = UserSecurity::findByUserId((int)$user['id']);
 
         $this->view('student.profile.index', [
             'title' => 'My Profile - Student',
             'user' => $user,
             'student' => $student,
-            'enrollment' => $enrollment
+            'enrollment' => $enrollment,
+            'security' => $security
         ]);
     }
 
@@ -122,6 +125,31 @@ class ProfileController extends Controller
         $db->query("UPDATE users SET password = ? WHERE id = ?", [$hashedPassword, $user['id']]);
 
         $this->flash('success', 'Password updated successfully.');
+        $this->redirect('/student/profile');
+    }
+
+    public function updateSecurity(Request $request): void
+    {
+        $user = Auth::user();
+
+        $errors = $this->validate($request->body(), [
+            'secret_question' => 'required|min:5',
+            'secret_answer' => 'required|min:2'
+        ]);
+
+        if (!empty($errors)) {
+            $_SESSION['_errors'] = $errors;
+            $this->back();
+            return;
+        }
+
+        $question = trim((string)$request->input('secret_question'));
+        $answer = strtolower(trim((string)$request->input('secret_answer')));
+        $answerHash = password_hash($answer, PASSWORD_BCRYPT, ['cost' => PASSWORD_COST]);
+
+        UserSecurity::upsertForUser((int)$user['id'], $question, $answerHash);
+
+        $this->flash('success', 'Security question updated successfully.');
         $this->redirect('/student/profile');
     }
 }
