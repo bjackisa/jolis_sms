@@ -101,6 +101,28 @@ footer.bg-dark .d-flex a.text-muted:hover {
     color: #ffffff !important;
 }
 
+/* Footer link hover effects */
+.footer-link {
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: #ffffff !important;
+    transform: translateX(5px);
+}
+
+/* Social media link hover effects */
+.social-link {
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.social-link:hover {
+    color: #ffffff !important;
+    transform: translateY(-3px) scale(1.1);
+}
+
 .hero-section::before {
     content: '';
     position: absolute;

@@ -83,27 +83,27 @@ use App\Core\View;
                 <div class="col-lg-2">
                     <h6 class="fw-bold mb-3">Quick Links</h6>
                     <ul class="list-unstyled">
-                        <li><a href="/" class="text-decoration-none" style="color: #e0e0e0;">Home</a></li>
-                        <li><a href="/about" class="text-decoration-none" style="color: #e0e0e0;">About</a></li>
-                        <li><a href="/contact" class="text-decoration-none" style="color: #e0e0e0;">Contact</a></li>
-                        <li><a href="/login" class="text-decoration-none" style="color: #e0e0e0;">Login</a></li>
+                        <li><a href="/" class="text-decoration-none footer-link" style="color: #e0e0e0;">Home</a></li>
+                        <li><a href="/about" class="text-decoration-none footer-link" style="color: #e0e0e0;">About</a></li>
+                        <li><a href="/contact" class="text-decoration-none footer-link" style="color: #e0e0e0;">Contact</a></li>
+                        <li><a href="/login" class="text-decoration-none footer-link" style="color: #e0e0e0;">Login</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
                     <h6 class="fw-bold mb-3">Contact Info</h6>
                     <ul class="list-unstyled" style="color: #e0e0e0;">
-                        <li><i class="bi bi-geo-alt me-2"></i>Kampala, Uganda</li>
-                        <li><i class="bi bi-telephone me-2"></i>+256 700 000 000</li>
+                        <li><i class="bi bi-geo-alt me-2"></i>Akright City, Entebbe, Wakiso</li>
+                        <li><i class="bi bi-telephone me-2"></i>+256702860347</li>
                         <li><i class="bi bi-envelope me-2"></i>info@jolis.academy</li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
                     <h6 class="fw-bold mb-3">Follow Us</h6>
                     <div class="d-flex gap-3">
-                        <a href="#" class="fs-4" style="color: #e0e0e0;"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="fs-4" style="color: #e0e0e0;"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="fs-4" style="color: #e0e0e0;"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="fs-4" style="color: #e0e0e0;"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.facebook.com/bjackisa" target="_blank" class="fs-4 social-link" style="color: #e0e0e0;"><i class="bi bi-facebook"></i></a>
+                        <a href="https://twitter.com/bjackisa" target="_blank" class="fs-4 social-link" style="color: #e0e0e0;"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.instagram.com/bjackisa" target="_blank" class="fs-4 social-link" style="color: #e0e0e0;"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/bjackisa" target="_blank" class="fs-4 social-link" style="color: #e0e0e0;"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
             </div>

@@ -54,8 +54,8 @@ class HomeController extends Controller
             'title' => 'Contact Us - Jolis SMS',
             'schoolName' => Setting::get('school_name', 'Jolis ICT Academy'),
             'schoolEmail' => Setting::get('school_email', 'info@jolis.academy'),
-            'schoolPhone' => Setting::get('school_phone', '+256700000000'),
-            'schoolAddress' => Setting::get('school_address', 'Kampala, Uganda')
+            'schoolPhone' => Setting::get('school_phone', '+256702860347'),
+            'schoolAddress' => Setting::get('school_address', 'Akright City, Entebbe, Wakiso')
         ]);
     }
 
@@ -77,23 +77,39 @@ class HomeController extends Controller
 
         $data = $request->body();
         
+        $db = \App\Core\Database::getInstance();
+        
         try {
-            $mailer = new Mailer();
-            $mailer->to(Setting::get('school_email', 'info@jolis.academy'))
-                   ->subject('Contact Form: ' . $data['subject'])
-                   ->body("
-                       <h2>New Contact Form Submission</h2>
-                       <p><strong>Name:</strong> {$data['name']}</p>
-                       <p><strong>Email:</strong> {$data['email']}</p>
-                       <p><strong>Subject:</strong> {$data['subject']}</p>
-                       <p><strong>Message:</strong></p>
-                       <p>{$data['message']}</p>
-                   ")
-                   ->send();
+            $db->insert('contact_messages', [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'subject' => $data['subject'],
+                'message' => $data['message'],
+                'status' => 'new',
+                'ip_address' => $_SERVER['REMOTE_ADDR'] ?? null,
+                'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? null
+            ]);
             
-            $this->flash('success', 'Your message has been sent successfully!');
+            try {
+                $mailer = new Mailer();
+                $mailer->to(Setting::get('school_email', 'info@jolis.academy'))
+                       ->subject('Contact Form: ' . $data['subject'])
+                       ->body("
+                           <h2>New Contact Form Submission</h2>
+                           <p><strong>Name:</strong> {$data['name']}</p>
+                           <p><strong>Email:</strong> {$data['email']}</p>
+                           <p><strong>Subject:</strong> {$data['subject']}</p>
+                           <p><strong>Message:</strong></p>
+                           <p>{$data['message']}</p>
+                       ")
+                       ->send();
+            } catch (\Exception $e) {
+                // Email sending failed, but message is saved in database
+            }
+            
+            $this->flash('success', 'Your message has been sent successfully! We will get back to you soon.');
         } catch (\Exception $e) {
-            $this->flash('success', 'Your message has been received. We will get back to you soon!');
+            $this->flash('error', 'Failed to send message. Please try again later.');
         }
 
         $this->redirect('/contact');
