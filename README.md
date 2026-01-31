@@ -74,7 +74,7 @@ A comprehensive School Management System built for **Jolis ICT Academy** using O
 
 3. Import the database schema:
    ```bash
-   mysql -u root -p jolis_sms < database/schema.sql
+   check seeders folder
    ```
 
 4. Copy `.env.example` to `.env` and configure:
@@ -99,45 +99,13 @@ A comprehensive School Management System built for **Jolis ICT Academy** using O
 ## Default Login Credentials
 
 ### Instructor
-- **Email:** instructor@jolis.academy
+- **Email:** barack@jolis.academy
 - **Password:** password123
 
 ### Student
-- **Email:** student@jolis.academy
+- **Email:** gorret@jolis.academy
 - **Password:** password123
 
-## Directory Structure
-
-```
-jolis_sms/
-├── app/
-│   ├── Controllers/
-│   │   ├── Api/
-│   │   ├── Instructor/
-│   │   └── Student/
-│   ├── Core/
-│   ├── Middleware/
-│   ├── Models/
-│   └── Views/
-│       ├── auth/
-│       ├── errors/
-│       ├── home/
-│       ├── instructor/
-│       ├── layouts/
-│       └── student/
-├── config/
-├── database/
-│   └── seeders/
-├── public/
-│   └── assets/
-│       ├── css/
-│       └── js/
-├── routes/
-├── vendor/
-├── .env
-├── .htaccess
-└── composer.json
-```
 
 ## Uganda Grading System
 
