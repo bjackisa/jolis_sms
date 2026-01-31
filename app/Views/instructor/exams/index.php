@@ -44,11 +44,7 @@ View::extend('layouts.dashboard');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (empty($exams)): ?>
-                    <tr>
-                        <td colspan="7" class="text-center text-muted py-4">No exams found.</td>
-                    </tr>
-                    <?php else: ?>
+                    <?php if (!empty($exams)): ?>
                     <?php foreach ($exams as $exam): ?>
                     <tr>
                         <td class="fw-semibold"><?= htmlspecialchars($exam['name']) ?></td>
@@ -91,7 +87,13 @@ View::extend('layouts.dashboard');
 $(document).ready(function() {
     $('#examsTable').DataTable({
         pageLength: 25,
-        order: [[4, 'desc']]
+        order: [[4, 'desc']],
+        columnDefs: [
+            { orderable: false, searchable: false, targets: [6] }
+        ],
+        language: {
+            emptyTable: 'No exams found.'
+        }
     });
 });
 </script>
